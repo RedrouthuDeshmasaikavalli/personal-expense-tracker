@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Expense Tracker</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background:#f5f5f5;
+        }
+
+        .card-box{
+            border-radius:15px;
+        }
+
+        .user-link{
+            text-decoration:none;
+            color:black;
+            font-weight:bold;
+            font-size:18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container py-3">
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <div>
+            <h3>💰 Expense Tracker</h3>
+            <small>📅 Today : {{ today }}</small>
+        </div>
+
+        <a href="/view" class="user-link">
+            👤 {{ user }}
+        </a>
+
+    </div>
+
+    <hr>
+
+    <div class="row text-center">
+
+        <div class="col-4">
+            <div class="card shadow-sm card-box">
+                <div class="card-body">
+                    <h6>Salary / Pocket money</h6>
+                    <b>₹{{ salary }}</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card shadow-sm card-box">
+                <div class="card-body">
+                    <h6>Total Expenses</h6>
+                    <b>₹{{ total }}</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card shadow-sm card-box">
+                <div class="card-body">
+                    <h6>Remaining Amount</h6>
+                    <b>₹{{ remaining }}</b>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <h5>💰 Set Salary / Pocket money</h5>
+
+    <form method="POST">
+
+        <input type="hidden" name="type" value="salary">
+
+        <div class="input-group">
+
+            <input
+                type="number"
+                name="salary"
+                class="form-control"
+                placeholder="Enter Salary / Pocket money">
+
+            <button class="btn btn-success">
+                Save
+            </button>
+
+        </div>
+
+    </form>
+
+    <br>
+
+    <h5>➕ Add Expense</h5>
+
+    <form method="POST">
+
+        <input type="hidden" name="type" value="expense">
+
+        <div class="row">
+
+            <div class="col-6">
+
+                <select name="category" class="form-select">
+
+                    <option>Food</option>
+                    <option>Travel</option>
+                    <option>Shopping</option>
+                    <option>Bills</option>
+                    <option>Recharge</option>
+                    <option>Entertainment</option>
+                    <option>Others</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-6">
+
+                <input
+                    type="number"
+                    name="amount"
+                    class="form-control"
+                    placeholder="Amount">
+
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary w-100 mt-2">
+            Add Expense
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h5>📋 Your Expenses</h5>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-striped">
+
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+
+            {% for e in expenses %}
+
+            <tr>
+
+                <td>{{ e[2] }}</td>
+
+                <td>{{ e[3] }}</td>
+
+                <td>₹{{ e[4] }}</td>
+
+                <td>
+
+                    <a href="/edit/{{ e[0] }}"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a href="/delete/{{ e[0] }}"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

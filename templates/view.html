@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        body{
+            background:#f5f5f5;
+        }
+
+        .dashboard-box{
+            max-width:800px;
+            margin:auto;
+            margin-top:20px;
+        }
+
+        .username{
+            font-size:30px;
+            font-weight:bold;
+            text-align:center;
+        }
+
+        .heading{
+            text-align:center;
+            color:#666;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container dashboard-box">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h2 class="text-center">
+                📊 Dashboard
+            </h2>
+
+            <div class="username">
+                👤 {{ user }}
+            </div>
+
+            <p class="heading">
+                Your Daily Expenses
+            </p>
+
+            <hr>
+
+            <!-- Date Picker -->
+
+            <form method="GET" action="/view">
+
+                <div class="row">
+
+                    <div class="col-8">
+
+                        <input
+                            type="date"
+                            name="date"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                    <div class="col-4">
+
+                        <button
+                            class="btn btn-primary w-100">
+
+                            View
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <hr>
+
+            <!-- Expenses Table -->
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-striped">
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    {% for e in expenses %}
+
+                    <tr>
+
+                        <td>{{ e[2] }}</td>
+
+                        <td>{{ e[3] }}</td>
+
+                        <td>₹{{ e[4] }}</td>
+
+                        <td>
+
+                            <a href="/edit/{{ e[0] }}"
+                               class="btn btn-warning btn-sm">
+                               Edit
+                            </a>
+
+                            <a href="/delete/{{ e[0] }}"
+                               class="btn btn-danger btn-sm">
+                               Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+            <hr>
+
+            <!-- Add Expense -->
+
+            {% if selected_date %}
+
+            <h5 class="text-center">
+                Add Expense For {{ selected_date }}
+            </h5>
+
+            <form method="POST" action="/add_old">
+
+                <input
+                    type="hidden"
+                    name="expense_date"
+                    value="{{ selected_date }}">
+
+                <div class="mb-2">
+
+                    <select name="category" class="form-control" required>
+    <option value="">Select Category</option>
+    <option value="Food">Food</option>
+    <option value="Travel">Travel</option>
+    <option value="Entertainment">Entertainment</option>
+    <option value="Bills">Bills</option>
+    <option value="Shopping">Shopping</option>
+    <option value="Other">Other</option>
+</select>
+
+                </div>
+
+                <div class="mb-2">
+
+                    <input
+                        type="number"
+                        name="amount"
+                        class="form-control"
+                        placeholder="Amount"
+                        required>
+
+                </div>
+
+                <button
+                    class="btn btn-success w-100">
+
+                    Add Expense
+
+                </button>
+
+            </form>
+
+            {% endif %}
+
+            <div class="text-center mt-3">
+
+                <a href="/app"
+                   class="btn btn-success">
+
+                    ⬅ Back
+
+                </a>
+
+                <a href="/logout"
+                   class="btn btn-danger">
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

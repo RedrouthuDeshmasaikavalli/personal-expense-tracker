@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-4 mt-5">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">
+                        🔐 Login
+                    </h2>
+
+                    <form method="POST">
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <input
+                                type="text"
+                                name="username"
+                                class="form-control"
+                                placeholder="Username"
+                                required>
+                        </div>
+
+                        <!-- Password with eye button -->
+                        <div class="mb-3 position-relative">
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="login_password"
+                                class="form-control"
+                                placeholder="Password"
+                                required>
+
+                            <span onclick="toggleLoginPassword()"
+                                  style="position:absolute; right:10px; top:8px; cursor:pointer;">
+                                👁️
+                            </span>
+
+                        </div>
+
+                        <!-- Login Button -->
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100">
+
+                            Login
+
+                        </button>
+
+                    </form>
+
+                    <!-- Links -->
+                    <div class="text-center mt-3">
+
+                        <a href="/register">Create Account</a> |
+                        <a href="/forgot">Forgot Password?</a>
+
+                    </div>
+
+                    <!-- SUCCESS MESSAGE (NEW ADDED) -->
+                    {% if msg %}
+                    <div class="alert alert-success mt-3">
+                        {{ msg }}
+                    </div>
+                    {% endif %}
+
+                    <!-- ERROR MESSAGE -->
+                    {% if error %}
+                    <div class="alert alert-danger mt-3">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JS for toggle password -->
+<script>
+function toggleLoginPassword() {
+    let pwd = document.getElementById("login_password");
+
+    if (pwd.type === "password") {
+        pwd.type = "text";
+    } else {
+        pwd.type = "password";
+    }
+}
+</script>
+
+</body>
+</html>
