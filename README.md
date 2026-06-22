@@ -90,6 +90,43 @@ This project strengthened my understanding of:
 - Backend Development with Flask
 - Financial Data Management
 - Software Engineering Best Practices
+## 📸 Screenshots
+
+---
+
+## 🚀 Dashboard (Main Feature ⭐🔥)
+
+![Dashboard](dashboard.png)
+
+---
+
+## 🏠 Home Page
+
+![Home](home.png)
+
+---
+
+## 🔐 Register Page
+
+![Register](Register.png)
+
+---
+
+## 📅 View Expenses Page
+
+![View](view.png)
+
+---
+
+## ✏️ Edit Expense Page
+
+![Edit](edit.png)
+
+---
+
+## 🔑 Reset / Forgot Password Page
+
+![Reset](reset.png)
 
 ## Author
 
